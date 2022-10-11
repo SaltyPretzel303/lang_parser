@@ -1,0 +1,87 @@
+package whileloop;
+
+// import ast.*;
+// import synttable.*;
+// import java.util.ArrayList;
+
+// code that will be added to the generated parser class
+// you can add methods and fields 
+parser code {:
+	public void print(String message){
+		System.out.println(message);
+	}
+:}
+
+terminal whilekw, dokw, endkw, assign;
+terminal semcol;
+terminal String ID, strconst;
+terminal Integer intconst;
+terminal plus, minus, equal;
+terminal andkw, orkw;
+
+non terminal whileloop, condition, condop, statementList, statement, expression, constant, op;
+
+// while condition do 
+//  	statList 
+// end
+
+whileloop ::= whilekw condition dokw statementList endkw 
+	{: print("Recognized whileloop statement ... "); :};
+
+condition ::= condition condop expression
+	{: print("Recognized condition list ... "); :};
+condition ::= expression
+	{: print("Recognized single expression as conditino ... "); :};
+
+condop ::= andkw;
+condop ::= orkw;
+
+statementList ::= statementList statement
+	{: print("Recognized statement list ... "); :};
+statementList ::= statement
+	{: print("Recognized single stetement ... "); :};
+
+statement ::= ID assign expression semcol
+	{: print("Recognized asignment with expression ... "); :};
+
+expression ::= ID 
+	{: print("Recognized single var as an expression ... "); :};
+expression ::= ID op ID
+	{: print("Recognized expression with two variables ... "); :};
+expression ::= ID op constant
+	{: print("Recognized expression with var and constant ... "); :};
+
+constant ::= intconst:intc
+	{: print("Recognized intconstant: " + intc + " ... "); :};
+constant ::= strconst:strc
+	{: print("Recognized strconstant: " + strc + " ... "); :};
+
+op ::= plus;
+op ::= minus;
+op ::= equal; 
+
+// possible errors
+
+whileloop ::= whilekw condition dokw statementList error
+	{: print("Missing end keyword in whileloop statement ... \n"); :};
+whileloop ::= whilekw condition dokw error
+	{: print("Missing statements list in whileloop statement ... \n"); :};
+whileloop ::= whilekw condition error
+	{: print("Missing do keyword in whileloop statement ... \n"); :};
+whileloop ::= whilekw error
+	{: print("Missing condition in whileloop statement ... \n"); :};
+
+condition ::= condition condop error
+	{: print("Missing expression after operand in contitions list ... "); :};
+condition ::= condition error
+	{: print("Missing conditional operator in contition ... "); :};
+
+statement ::= ID assign expression error
+	{: print("Missing semicolon at the end of assign statement ... "); :};
+statement ::= ID assign error
+	{: print("Missing expression in  assign statement ... "); :};
+statement ::= ID error
+	{: print("Missing = in  assign statement ... "); :};
+
+expression ::= ID op error
+	{: print("Missin second operand in expression ... "); :};

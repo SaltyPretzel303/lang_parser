@@ -1,0 +1,5 @@
+while  var_1 == var_2 || var_2 + var_3 do 
+	var_3 = var_4;
+	var_4 = ID1 + ID2;
+end
+
