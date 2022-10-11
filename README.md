@@ -38,3 +38,8 @@ If everything goes well Lexer.java class should be generated inside your package
 Build all java classes inside your package using build all alias: `$ build_all`.  
 
 If there was no errors you can write code inside the sample txt file and run parser with `$ run_parse`.  
+
+To run provided whileloop example: 
+  - Download and extract CUP.
+  - `.../lang_parser/ $ javac -cp java-cup-version.jar whileloop/*.java`
+  - `.../lang_parser/ $ java -cp java-cup-version.jar:./ whileloop.SyntaxParser whileloop/sample`
