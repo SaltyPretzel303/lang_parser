@@ -18,7 +18,7 @@ Inside newly created package you are gonna need next files:
   - Lexical specification used by jflex `touch parser/lex_spec.flex`.
   - Syntax and semantic specification used by CUP `touch parser/synt_spec.cup`.
   - Text file containing code that is gonna be read and parsed `touch parser/sample`. 
-  - Single java class with the main method in which you will use classes generated based on the specifications to read and parse sample code (class provided in the root of this repo, you can just copy it to your package).  
+  - Single java class with the main method in which you will use classes generated based on the specifications to read and parse sample code. Example of this class is provided as [SyntaxParser.java](/SyntaxParser.java). You can just copy it to your package but don't forget to replace package name with your package name.  
   `cp SyntaxParser.java ./parser/`  
 
 Write syntax/semantic specification in .cup file (example provided in the whileloop package [synt_spec.cup](/whileloop/synt_spec.cup)).  
@@ -38,7 +38,3 @@ If everything goes well Lexer.java class should be generated inside your package
 Build all java classes inside your package using build all alias: `$ build_all`.  
 
 If there was no errors you can write code inside the sample txt file and run parser with `$ run_parse`.  
-
- 
-
- 
